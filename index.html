@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ねねコーチのInstagramコンテンツ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #faf8f9;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    /* Hero header */
+    .hero {
+      background: linear-gradient(145deg, #E8A0B0 0%, #f5c6d0 50%, #fce4ec 100%);
+      padding: 60px 20px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -30px;
+      width: 250px; height: 250px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+    .hero-icon {
+      font-size: 3.5rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .hero h1 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: white;
+      text-shadow: 0 2px 8px rgba(200,100,120,0.3);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .hero p {
+      color: rgba(255,255,255,0.9);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: white;
+      color: #E8A0B0;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-top: 14px;
+      box-shadow: 0 2px 10px rgba(232,160,176,0.3);
+    }
+
+    /* Stats bar */
+    .stats-bar {
+      background: white;
+      border-bottom: 1px solid #f0e0e5;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #E8A0B0;
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: #999;
+    }
+
+    /* Main content */
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 36px 20px 60px;
+    }
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* Category cards */
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 2px 12px rgba(232,160,176,0.12);
+      border: 2px solid transparent;
+      transition: all 0.25s;
+    }
+    .card:hover {
+      border-color: #E8A0B0;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(232,160,176,0.25);
+    }
+    .card-icon {
+      font-size: 2.5rem;
+      flex-shrink: 0;
+      width: 60px;
+      height: 60px;
+      background: #fce8ee;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-body { flex: 1; }
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #333;
+    }
+    .card-desc {
+      font-size: 0.82rem;
+      color: #999;
+      line-height: 1.5;
+    }
+    .card-arrow {
+      color: #E8A0B0;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    /* Info box */
+    .info-box {
+      background: #fff8fa;
+      border: 1px solid #f5d0da;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-top: 24px;
+      font-size: 0.82rem;
+      color: #b07080;
+      line-height: 1.7;
+    }
+    .info-box strong { color: #E8A0B0; }
+
+    /* Footer */
+    footer {
+      background: white;
+      border-top: 1px solid #f0e0e5;
+      padding: 20px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <span class="hero-icon">📱</span>
+    <h1>ねねコーチの<br>Instagramコンテンツ</h1>
+    <p>中学受験ママのための<br>Q&Aコーナーアーカイブ</p>
+    <span class="hero-badge">中学受験コーチ ねね先生</span>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat">
+      <span class="stat-num">1,625</span>
+      <span class="stat-label">総画像数</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">2</span>
+      <span class="stat-label">コンテンツ種別</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">Q&A</span>
+      <span class="stat-label">コーナー</span>
+    </div>
+  </div>
+
+  <main>
+    <p class="section-title">コンテンツ種別</p>
+
+    <div class="cards">
+      <a class="card" href="gallery.html?cat=poll">
+        <div class="card-icon">📊</div>
+        <div class="card-body">
+          <div class="card-title">アンケート</div>
+          <div class="card-desc">投票・二択アンケートの結果ストーリー（378枚）。フォロワーのリアルな声・意識調査</div>
+        </div>
+        <span class="card-arrow">→</span>
+      </a>
+
+      <a class="card" href="gallery.html?cat=other">
+        <div class="card-icon">💬</div>
+        <div class="card-body">
+          <div class="card-title">それ以外</div>
+          <div class="card-desc">質問箱・Q&A・お役立ち投稿など（1,247枚）。受験の悩みや疑問への回答</div>
+        </div>
+        <span class="card-arrow">→</span>
+      </a>
+    </div>
+
+    <div class="info-box">
+      <strong>📌 使い方のヒント</strong><br>
+      上の2種類から選ぶと、該当する画像だけを表示できます。画像を<strong>クリックすると拡大表示</strong>できます。
+      キーボードの <strong>← →</strong> キーで前後の画像に移動、<strong>Esc</strong> で閉じられます。
+      画像が多いため、スクロールに合わせて自動的に読み込まれます（Lazy Loading）。
+    </div>
+  </main>
+
+  <footer>
+    ねねさん ナレッジ構築プロジェクト — Q&Aコーナーアーカイブ
+  </footer>
+
+</body>
+</html>
