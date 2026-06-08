@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ねねコーチ Instagram ギャラリー</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #faf8f9;
+      color: #333;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(135deg, #E8A0B0 0%, #f5c6d0 100%);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(232,160,176,0.4);
+    }
+    header h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+    .nav-home {
+      display: inline-block;
+      margin-top: 10px;
+      background: white;
+      color: #E8A0B0;
+      padding: 6px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+    .nav-home:hover { background: #fff0f4; }
+    .filter-bar {
+      background: white;
+      border-bottom: 1px solid #f0e0e5;
+      padding: 14px 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    .filter-bar span {
+      font-size: 0.8rem;
+      color: #999;
+      margin-right: 6px;
+    }
+    .filter-btn {
+      background: #f5e8ec;
+      color: #E8A0B0;
+      border: 2px solid transparent;
+      padding: 7px 18px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: #E8A0B0;
+      color: white;
+      border-color: #E8A0B0;
+    }
+    .count-bar {
+      text-align: center;
+      padding: 10px;
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      padding: 3px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    @media (min-width: 600px) {
+      .gallery-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (min-width: 900px) {
+      .gallery-grid { grid-template-columns: repeat(5, 1fr); }
+    }
+    .gallery-item {
+      aspect-ratio: 9/16;
+      overflow: hidden;
+      cursor: pointer;
+      background: #f0e0e5;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.2s;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    .gallery-item .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.5));
+      padding: 20px 6px 6px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .gallery-item:hover .overlay { opacity: 1; }
+    .gallery-item .overlay span {
+      color: white;
+      font-size: 0.65rem;
+      word-break: break-all;
+    }
+    /* Lightbox */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    }
+    #lightbox-controls {
+      display: flex;
+      gap: 16px;
+      margin-top: 16px;
+      align-items: center;
+    }
+    .lb-btn {
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 24px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      transition: background 0.2s;
+    }
+    .lb-btn:hover { background: rgba(255,255,255,0.3); }
+    .lb-btn.close-btn {
+      background: rgba(232,160,176,0.5);
+    }
+    .lb-btn.close-btn:hover { background: rgba(232,160,176,0.8); }
+    #lb-counter {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+    }
+    #lb-filename {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.7rem;
+      margin-top: 8px;
+      word-break: break-all;
+      max-width: 80vw;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📸 ねねコーチ Instagram ギャラリー</h1>
+    <p>アンケート / それ以外</p>
+    <a href="index.html" class="nav-home">← トップへ戻る</a>
+  </header>
+
+  <div class="filter-bar">
+    <span>表示：</span>
+    <button class="filter-btn active" data-filter="poll" onclick="setFilter('poll', this)">アンケート (__POLL__)</button>
+    <button class="filter-btn" data-filter="other" onclick="setFilter('other', this)">それ以外 (__OTHER__)</button>
+  </div>
+  <div class="count-bar" id="count-bar">表示中: __POLL__ 枚 / 全 __TOTAL__ 枚</div>
+
+  <div class="gallery-grid" id="gallery-grid"></div>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <img id="lb-img" src="" alt="">
+    <div id="lb-counter"></div>
+    <div id="lb-filename"></div>
+    <div id="lightbox-controls">
+      <button class="lb-btn" onclick="lbPrev()">◀ 前へ</button>
+      <button class="lb-btn close-btn" onclick="closeLb()">✕ 閉じる</button>
+      <button class="lb-btn" onclick="lbNext()">次へ ▶</button>
+    </div>
+  </div>
+
+  <script>
+    const ALL_IMAGES = [
+__ALL_IMAGES__
+];
+
+    const CAT_BY_IDX = __CAT_BY_IDX__;
+    let currentFilter = 'poll';
+    let filteredImages = [];
+    let lbIndex = 0;
+
+    function getFiltered(filter) {
+      if (filter === 'poll') return ALL_IMAGES.filter(i => CAT_BY_IDX[i.idx] === 'poll');
+      if (filter === 'other') return ALL_IMAGES.filter(i => CAT_BY_IDX[i.idx] === 'other');
+      return ALL_IMAGES.filter(i => CAT_BY_IDX[i.idx] === 'poll');
+    }
+
+    function setFilter(filter, btn) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderGallery();
+    }
+
+    function renderGallery() {
+      filteredImages = getFiltered(currentFilter);
+      const grid = document.getElementById('gallery-grid');
+      const bar = document.getElementById('count-bar');
+      bar.textContent = `表示中: ${filteredImages.length} 枚 / 全 __TOTAL__ 枚`;
+      grid.innerHTML = '';
+      filteredImages.forEach((img, i) => {
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        item.onclick = () => openLb(i);
+        item.innerHTML = `
+          <img src="${img.src}" alt="${img.name}" loading="lazy">
+          <div class="overlay"><span>${img.name}</span></div>
+        `;
+        grid.appendChild(item);
+      });
+    }
+
+    // Lightbox
+    function openLb(i) {
+      lbIndex = i;
+      updateLb();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLb() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function updateLb() {
+      const img = filteredImages[lbIndex];
+      document.getElementById('lb-img').src = img.src;
+      document.getElementById('lb-counter').textContent = `${lbIndex + 1} / ${filteredImages.length}`;
+      document.getElementById('lb-filename').textContent = img.name;
+    }
+
+    function lbPrev() {
+      lbIndex = (lbIndex - 1 + filteredImages.length) % filteredImages.length;
+      updateLb();
+    }
+
+    function lbNext() {
+      lbIndex = (lbIndex + 1) % filteredImages.length;
+      updateLb();
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'ArrowLeft') lbPrev();
+      if (e.key === 'ArrowRight') lbNext();
+      if (e.key === 'Escape') closeLb();
+    });
+
+    // Close lightbox on background click
+    document.getElementById('lightbox').addEventListener('click', e => {
+      if (e.target === document.getElementById('lightbox')) closeLb();
+    });
+
+    // Initial render — honor ?cat=poll|other (or ?filter=) from the URL
+    (function initFilter(){
+      const p = new URLSearchParams(location.search);
+      let f = p.get('cat') || p.get('filter');
+      if (f === 'アンケート') f = 'poll';
+      if (f === 'その他' || f === 'それ以外') f = 'other';
+      if (f !== 'poll' && f !== 'other') f = 'poll';
+      currentFilter = f;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === f));
+      renderGallery();
+    })();
+  </script>
+</body>
+</html>

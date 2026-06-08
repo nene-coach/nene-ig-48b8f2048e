@@ -1,0 +1,42 @@
+name: Build gallery
+
+# images/ に画像を追加・削除したり categories.json を編集すると自動でギャラリーを再生成します。
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'images/**'
+      - 'categories.json'
+      - 'gallery.template.html'
+      - 'index.template.html'
+      - 'build_gallery.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-gallery
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Build gallery.html / index.html
+        run: python3 build_gallery.py
+      - name: Commit regenerated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add gallery.html index.html categories.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "auto-build gallery"
+            git push
+          fi
