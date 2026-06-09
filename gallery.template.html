@@ -5,184 +5,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ねねコーチ Instagram ギャラリー</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@500;700;800&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Noto Sans JP', sans-serif;
-      background: #faf8f9;
-      color: #333;
-      min-height: 100vh;
+    :root{
+      --rose:#b33e5c; --rose-mid:#d4728a; --rose-soft:#e8a0b5;
+      --gold:#c79a5b; --ink:#3f343a; --muted:#a6939a;
+      --bg:#fdf2f4; --card:#ffffff; --line:#f1dee4;
     }
-    header {
-      background: linear-gradient(135deg, #E8A0B0 0%, #f5c6d0 100%);
-      color: white;
-      padding: 20px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 10px rgba(232,160,176,0.4);
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      font-family:'Noto Sans JP',sans-serif; color:var(--ink);
+      background-color:var(--bg);
+      background-image:
+        radial-gradient(ellipse at 15% 25%, rgba(240,160,180,.30) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 30%, rgba(245,205,165,.22) 0%, transparent 50%),
+        radial-gradient(ellipse at 25% 80%, rgba(200,150,180,.26) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 85%, rgba(240,210,200,.20) 0%, transparent 50%);
+      background-attachment:fixed; min-height:100vh;
     }
-    header h1 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 4px;
+    header{
+      background:linear-gradient(135deg,var(--rose) 0%,var(--rose-mid) 55%,var(--rose-soft) 100%);
+      color:#fff; padding:22px 20px 18px; text-align:center;
+      position:sticky; top:0; z-index:100;
+      box-shadow:0 6px 24px rgba(179,62,92,.28);
+      border-bottom:2px solid rgba(255,255,255,.35);
     }
-    header p {
-      font-size: 0.85rem;
-      opacity: 0.9;
+    header h1{
+      font-family:'Shippori Mincho B1',serif; font-weight:800;
+      font-size:1.32rem; letter-spacing:.04em; margin-bottom:6px;
+      text-shadow:0 2px 10px rgba(120,30,55,.25);
     }
-    .nav-home {
-      display: inline-block;
-      margin-top: 10px;
-      background: white;
-      color: #E8A0B0;
-      padding: 6px 16px;
-      border-radius: 20px;
-      text-decoration: none;
-      font-size: 0.8rem;
-      font-weight: 700;
-      transition: all 0.2s;
+    header p{font-size:.82rem; opacity:.92; letter-spacing:.12em;}
+    header p::before,header p::after{content:"\2014"; color:rgba(255,255,255,.6); margin:0 .5em;}
+    .nav-home{
+      display:inline-block; margin-top:12px; background:#fff; color:var(--rose);
+      padding:6px 18px; border-radius:999px; text-decoration:none;
+      font-size:.78rem; font-weight:700; letter-spacing:.03em;
+      box-shadow:0 3px 10px rgba(179,62,92,.22); transition:.2s;
     }
-    .nav-home:hover { background: #fff0f4; }
-    .filter-bar {
-      background: white;
-      border-bottom: 1px solid #f0e0e5;
-      padding: 14px 20px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
+    .nav-home:hover{transform:translateY(-1px); box-shadow:0 6px 16px rgba(179,62,92,.3);}
+    .filter-bar{
+      background:rgba(255,255,255,.85); backdrop-filter:blur(6px);
+      border-bottom:1px solid var(--line); padding:15px 20px;
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:center; align-items:center;
+      position:sticky; top:78px; z-index:90;
     }
-    .filter-bar span {
-      font-size: 0.8rem;
-      color: #999;
-      margin-right: 6px;
+    .filter-bar span{font-size:.78rem; color:var(--muted); letter-spacing:.08em; margin-right:4px;}
+    .filter-btn{
+      background:#fbeef2; color:var(--rose);
+      border:1.5px solid #f1d2dc; padding:8px 22px; border-radius:999px;
+      cursor:pointer; font-size:.85rem; font-family:'Noto Sans JP',sans-serif;
+      font-weight:700; letter-spacing:.02em; transition:.22s;
     }
-    .filter-btn {
-      background: #f5e8ec;
-      color: #E8A0B0;
-      border: 2px solid transparent;
-      padding: 7px 18px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-weight: 500;
-      transition: all 0.2s;
+    .filter-btn:hover{border-color:var(--rose-soft); transform:translateY(-1px);}
+    .filter-btn.active{
+      background:linear-gradient(135deg,var(--rose),var(--rose-mid));
+      color:#fff; border-color:transparent; box-shadow:0 4px 14px rgba(179,62,92,.32);
     }
-    .filter-btn:hover, .filter-btn.active {
-      background: #E8A0B0;
-      color: white;
-      border-color: #E8A0B0;
+    .count-bar{
+      text-align:center; padding:14px 10px 6px; font-size:.8rem; color:var(--muted);
+      letter-spacing:.05em;
     }
-    .count-bar {
-      text-align: center;
-      padding: 10px;
-      font-size: 0.8rem;
-      color: #aaa;
+    .count-bar::before{content:"\25C8"; color:var(--gold); margin-right:.5em; font-size:.7rem;}
+    .gallery-grid{
+      display:grid; grid-template-columns:repeat(3,1fr); gap:8px;
+      padding:14px; max-width:1200px; margin:0 auto;
     }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-      padding: 3px;
-      max-width: 1200px;
-      margin: 0 auto;
+    @media(min-width:600px){.gallery-grid{grid-template-columns:repeat(4,1fr);gap:10px;padding:18px;}}
+    @media(min-width:900px){.gallery-grid{grid-template-columns:repeat(5,1fr);}}
+    .gallery-item{
+      aspect-ratio:9/16; overflow:hidden; cursor:pointer; position:relative;
+      background:#f6e7ec; border-radius:12px;
+      box-shadow:0 2px 10px rgba(179,62,92,.10);
+      border:1px solid rgba(255,255,255,.6); transition:.25s;
     }
-    @media (min-width: 600px) {
-      .gallery-grid { grid-template-columns: repeat(4, 1fr); }
+    .gallery-item:hover{transform:translateY(-3px); box-shadow:0 10px 26px rgba(179,62,92,.22);}
+    .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .35s;}
+    .gallery-item:hover img{transform:scale(1.06);}
+    .gallery-item .overlay{
+      position:absolute; inset:auto 0 0 0;
+      background:linear-gradient(transparent,rgba(120,30,55,.62));
+      padding:22px 8px 7px; opacity:0; transition:opacity .25s;
     }
-    @media (min-width: 900px) {
-      .gallery-grid { grid-template-columns: repeat(5, 1fr); }
-    }
-    .gallery-item {
-      aspect-ratio: 9/16;
-      overflow: hidden;
-      cursor: pointer;
-      background: #f0e0e5;
-      position: relative;
-    }
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.2s;
-    }
-    .gallery-item:hover img {
-      transform: scale(1.05);
-    }
-    .gallery-item .overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,0.5));
-      padding: 20px 6px 6px;
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-    .gallery-item:hover .overlay { opacity: 1; }
-    .gallery-item .overlay span {
-      color: white;
-      font-size: 0.65rem;
-      word-break: break-all;
-    }
+    .gallery-item:hover .overlay{opacity:1;}
+    .gallery-item .overlay span{color:#fff;font-size:.62rem;word-break:break-all;}
     /* Lightbox */
-    #lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.92);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-    #lightbox.open { display: flex; }
-    #lightbox img {
-      max-width: 90vw;
-      max-height: 85vh;
-      object-fit: contain;
-      border-radius: 8px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
-    }
-    #lightbox-controls {
-      display: flex;
-      gap: 16px;
-      margin-top: 16px;
-      align-items: center;
-    }
-    .lb-btn {
-      background: rgba(255,255,255,0.15);
-      color: white;
-      border: none;
-      padding: 10px 22px;
-      border-radius: 24px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-family: 'Noto Sans JP', sans-serif;
-      transition: background 0.2s;
-    }
-    .lb-btn:hover { background: rgba(255,255,255,0.3); }
-    .lb-btn.close-btn {
-      background: rgba(232,160,176,0.5);
-    }
-    .lb-btn.close-btn:hover { background: rgba(232,160,176,0.8); }
-    #lb-counter {
-      color: rgba(255,255,255,0.7);
-      font-size: 0.85rem;
-    }
-    #lb-filename {
-      color: rgba(255,255,255,0.5);
-      font-size: 0.7rem;
-      margin-top: 8px;
-      word-break: break-all;
-      max-width: 80vw;
-      text-align: center;
-    }
+    #lightbox{display:none;position:fixed;inset:0;background:rgba(40,18,28,.94);
+      z-index:1000;justify-content:center;align-items:center;flex-direction:column;}
+    #lightbox.open{display:flex;}
+    #lightbox img{max-width:92vw;max-height:84vh;object-fit:contain;border-radius:10px;
+      box-shadow:0 12px 50px rgba(0,0,0,.6);}
+    #lightbox-controls{display:flex;gap:14px;margin-top:18px;align-items:center;}
+    .lb-btn{background:rgba(255,255,255,.16);color:#fff;border:none;padding:11px 24px;
+      border-radius:999px;cursor:pointer;font-size:1rem;font-family:'Noto Sans JP',sans-serif;
+      font-weight:500;transition:.2s;}
+    .lb-btn:hover{background:rgba(255,255,255,.3);}
+    .lb-btn.close-btn{background:rgba(179,62,92,.55);}
+    .lb-btn.close-btn:hover{background:rgba(179,62,92,.85);}
+    #lb-counter{color:rgba(255,255,255,.8);font-size:.85rem;letter-spacing:.05em;}
+    #lb-filename{color:rgba(255,255,255,.5);font-size:.7rem;margin-top:8px;
+      word-break:break-all;max-width:80vw;text-align:center;}
   </style>
 </head>
 <body>

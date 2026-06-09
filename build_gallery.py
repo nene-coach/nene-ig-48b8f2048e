@@ -58,7 +58,7 @@ gt=gt.replace("__POLL__", str(poll)).replace("__OTHER__", str(other)).replace("_
 open(os.path.join(ROOT,"gallery.html"),"w",encoding="utf-8").write(gt)
 
 it=open(os.path.join(ROOT,"index.template.html"),encoding="utf-8").read()
-it=it.replace("__POLL__", str(poll)).replace("__OTHER__", f"{other:,}")
+it=it.replace("__POLL__", str(poll)).replace("__OTHER__", f"{other:,}").replace("__TOTAL__", f"{total:,}")
 open(os.path.join(ROOT,"index.html"),"w",encoding="utf-8").write(it)
 
 print(f"built: total={total} poll={poll} other={other}  (categories.json {'updated' if new_cats!=cats else 'unchanged'})")
