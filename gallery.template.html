@@ -69,20 +69,20 @@
     }
     .count-bar::before{content:"\25C8"; color:var(--gold); margin-right:.5em; font-size:.7rem;}
     .gallery-grid{
-      display:grid; grid-template-columns:repeat(3,1fr); gap:8px;
-      padding:14px; max-width:1200px; margin:0 auto;
+      display:grid; grid-template-columns:repeat(3,1fr); gap:12px;
+      padding:18px; max-width:1080px; margin:0 auto;
     }
-    @media(min-width:600px){.gallery-grid{grid-template-columns:repeat(4,1fr);gap:10px;padding:18px;}}
-    @media(min-width:900px){.gallery-grid{grid-template-columns:repeat(5,1fr);}}
+    @media(min-width:600px){.gallery-grid{gap:14px;padding:24px;}}
+    @media(min-width:900px){.gallery-grid{grid-template-columns:repeat(4,1fr);gap:16px;}}
     .gallery-item{
       aspect-ratio:9/16; overflow:hidden; cursor:pointer; position:relative;
       background:#f6e7ec; border-radius:12px;
       box-shadow:0 2px 10px rgba(179,62,92,.10);
       border:1px solid rgba(255,255,255,.6); transition:.25s;
     }
-    .gallery-item:hover{transform:translateY(-3px); box-shadow:0 10px 26px rgba(179,62,92,.22);}
-    .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .35s;}
-    .gallery-item:hover img{transform:scale(1.06);}
+    .gallery-item:hover{transform:translateY(-2px); box-shadow:0 8px 22px rgba(179,62,92,.18);}
+    .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+    .gallery-item:hover img{transform:scale(1.03);}
     .gallery-item .overlay{
       position:absolute; inset:auto 0 0 0;
       background:linear-gradient(transparent,rgba(120,30,55,.62));
@@ -97,12 +97,12 @@
     #lightbox img{max-width:92vw;max-height:84vh;object-fit:contain;border-radius:10px;
       box-shadow:0 12px 50px rgba(0,0,0,.6);}
     #lightbox-controls{display:flex;gap:14px;margin-top:18px;align-items:center;}
-    .lb-btn{background:rgba(255,255,255,.16);color:#fff;border:none;padding:11px 24px;
-      border-radius:999px;cursor:pointer;font-size:1rem;font-family:'Noto Sans JP',sans-serif;
-      font-weight:500;transition:.2s;}
-    .lb-btn:hover{background:rgba(255,255,255,.3);}
-    .lb-btn.close-btn{background:rgba(179,62,92,.55);}
-    .lb-btn.close-btn:hover{background:rgba(179,62,92,.85);}
+    .lb-btn{background:rgba(255,255,255,.10);color:#fff;border:1px solid rgba(255,255,255,.24);padding:9px 20px;
+      border-radius:4px;cursor:pointer;font-size:.9rem;font-family:'Noto Sans JP',sans-serif;
+      font-weight:400;letter-spacing:.04em;transition:.2s;}
+    .lb-btn:hover{background:rgba(255,255,255,.22);}
+    .lb-btn.close-btn{background:rgba(179,62,92,.45);border-color:rgba(255,255,255,.2);}
+    .lb-btn.close-btn:hover{background:rgba(179,62,92,.75);}
     #lb-counter{color:rgba(255,255,255,.8);font-size:.85rem;letter-spacing:.05em;}
     #lb-filename{color:rgba(255,255,255,.5);font-size:.7rem;margin-top:8px;
       word-break:break-all;max-width:80vw;text-align:center;}
@@ -110,7 +110,7 @@
 </head>
 <body>
   <header>
-    <h1>📸 ねねコーチ Instagram ギャラリー</h1>
+    <h1>ねねコーチ Instagram ギャラリー</h1>
     <p>アンケート / それ以外</p>
     <a href="index.html" class="nav-home">← トップへ戻る</a>
   </header>
