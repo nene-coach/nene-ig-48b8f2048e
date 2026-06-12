@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ねねコーチ Instagram ギャラリー</title>
+  <title>nene's Instagramギャラリー</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@500;700;800&display=swap" rel="stylesheet">
@@ -110,7 +110,7 @@
 </head>
 <body>
   <header>
-    <h1>ねねコーチ Instagram ギャラリー</h1>
+    <h1>nene's Instagramギャラリー</h1>
     <p>アンケート / それ以外</p>
     <a href="index.html" class="nav-home">← トップへ戻る</a>
   </header>
@@ -120,7 +120,6 @@
     <button class="filter-btn active" data-filter="poll" onclick="setFilter('poll', this)">アンケート (__POLL__)</button>
     <button class="filter-btn" data-filter="other" onclick="setFilter('other', this)">それ以外 (__OTHER__)</button>
   </div>
-  <div class="count-bar" id="count-bar">表示中: __POLL__ 枚 / 全 __TOTAL__ 枚</div>
 
   <div class="gallery-grid" id="gallery-grid"></div>
 
@@ -162,8 +161,6 @@ __ALL_IMAGES__
     function renderGallery() {
       filteredImages = getFiltered(currentFilter);
       const grid = document.getElementById('gallery-grid');
-      const bar = document.getElementById('count-bar');
-      bar.textContent = `表示中: ${filteredImages.length} 枚 / 全 __TOTAL__ 枚`;
       grid.innerHTML = '';
       filteredImages.forEach((img, i) => {
         const item = document.createElement('div');
